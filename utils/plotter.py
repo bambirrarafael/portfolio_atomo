@@ -6,7 +6,7 @@ def plotar_balanco_energia(portfolio):
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=portfolio.recursos_df.index, y=portfolio.recursos_df['volume'], mode='lines', name='Recursos'))
     fig.add_trace(go.Scatter(x=portfolio.requisitos_df.index, y=portfolio.requisitos_df['volume'], mode='lines', name='Requisitos'))
-    fig.add_trace(go.Bar(x=portfolio.exposicao_df.index, y=portfolio.exposicao_df, name='Exposição'))
+    fig.add_trace(go.Bar(x=portfolio.exposicao_df.index, y=portfolio.exposicao_df['volume'], name='Exposição'))
     fig.update_layout(title='Balanço de energia',
                       xaxis_title='Data',
                       yaxis_title='Volume')

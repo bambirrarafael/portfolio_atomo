@@ -2,8 +2,8 @@ from utils.leitor_infomacoes import load_portfolio_data, load_previsao_precos_da
 from objetos.portfolio import Portfolio
 import utils.plotter as plt
 
-compras_df, vendas_df = load_portfolio_data('D:/Programas/asotech/atomo/pythonProject/dados/portfolio.xlsx')
-previsao_precos = load_previsao_precos_data('D:/Programas/asotech/atomo/pythonProject/dados/previsao_precos.xlsx')
+compras_df, vendas_df = load_portfolio_data('D:/Programas/asotech/portfolio_atomo/dados/portfolio.xlsx')
+previsao_precos = load_previsao_precos_data('D:/Programas/asotech/portfolio_atomo/dados/previsao_precos.xlsx')
 
 p = Portfolio(compras_df, vendas_df)
 p.calc_receita(cenario=previsao_precos)
