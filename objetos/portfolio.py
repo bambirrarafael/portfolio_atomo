@@ -15,6 +15,23 @@ class Portfolio:
         self.receita = None
         self.valor_presente = None
 
+    def print_info(self):
+        print("\n ------- Relatório do portfólio \n")
+        print("Informações de Compras:")
+        print(self.compras_df)
+        print("\n")
+        print("Informações de Vendas:")
+        print(self.vendas_df)
+        print("\n")
+        if self.receita is not None:
+            print(f'Horizonte de análise: \n {self.receita.index[0]} --- {self.receita.index[-1]} \n')
+        else:
+            print(f'Horizonte ainda não avaliado')
+        if self.valor_presente is not None:
+            print(f"Valor Presente do Portfólio: R$ {self.valor_presente:.2f}")
+        else:
+            print("Valor Presente do Portfólio: Não calculado")
+
     def calc_recursos(self):
         expanded_df = pd.concat([expand_df(row) for index, row in self.compras_df.iterrows()])
         expanded_df['horas_no_mes'] = expanded_df['dias_no_mes'] * 24

@@ -12,3 +12,5 @@ p.calc_valor_presente(0.01)     # 1% ao mês, equivalente à 12.6% ao ano
 plt.plotar_balanco_energia(p)
 plt.plotar_receitas_no_tempo(p)
 plt.plotar_volume_financeiro(p)
+
+p.print_info()
