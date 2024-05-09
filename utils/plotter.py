@@ -13,6 +13,14 @@ def plotar_balanco_energia(portfolio):
     fig.show()
 
 
+def plotar_previsao_precos(previsao_precos):
+    fig = px.line(previsao_precos)
+    fig.update_layout(title='Cenários',
+                      xaxis_title='Data',
+                      yaxis_title='Preço')
+    fig.show()
+
+
 def plotar_receitas_no_tempo(portfolio):
     fig = px.line(portfolio.receita.cumsum())
     fig.update_layout(title='Evolução patrimonial',
@@ -23,9 +31,13 @@ def plotar_receitas_no_tempo(portfolio):
 
 def plotar_volume_financeiro(portfolio):
     fig = go.Figure()
+    diferenca_fin_req_rec = portfolio.requisitos_df['resultado_financeiro'] + portfolio.recursos_df['resultado_financeiro']
+    fluxo_caixa = diferenca_fin_req_rec + portfolio.exposicao_df['resultado_financeiro']
     fig.add_trace(go.Scatter(x=portfolio.recursos_df.index, y=-portfolio.recursos_df['resultado_financeiro'], mode='lines', name='-1 * Recursos'))
     fig.add_trace(go.Scatter(x=portfolio.requisitos_df.index, y=portfolio.requisitos_df['resultado_financeiro'], mode='lines', name='Requisitos'))
+    fig.add_trace(go.Scatter(x=portfolio.requisitos_df.index, y=diferenca_fin_req_rec, mode='lines', name='delta financeiro requisitos recursos'))
     fig.add_trace(go.Scatter(x=portfolio.exposicao_df.index, y=portfolio.exposicao_df['resultado_financeiro'], mode='lines', name='Exposição'))
+    fig.add_trace(go.Scatter(x=portfolio.exposicao_df.index, y=fluxo_caixa, mode='lines', name='Fluxo de caixa'))
     fig.update_layout(title='Volume financeiro',
                       xaxis_title='Data',
                       yaxis_title='Valor')

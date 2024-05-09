@@ -13,4 +13,5 @@ def load_portfolio_data(filepath):
 
 def load_previsao_precos_data(filepath):
     dfs = pd.read_excel(filepath)
+    dfs = dfs.set_index('mes')
     return dfs
