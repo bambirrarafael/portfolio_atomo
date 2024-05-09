@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import numpy_financial as npf
+import copy
 
 
 class Portfolio:
@@ -19,7 +20,6 @@ class Portfolio:
 
     def print_info(self):
         print("\n ------- Relatório do portfólio \n")
-        print(f'Cenário: {self.cenario.name} \n')
         print("Informações de Compras:")
         print(self.compras_df)
         print("\n")
@@ -30,6 +30,8 @@ class Portfolio:
             print(f'Horizonte de análise: \n {self.receita.index[0]} --- {self.receita.index[-1]} \n')
         else:
             print(f'Horizonte ainda não avaliado')
+
+        print(f'\nCenário: {self.cenario.name} \n')
         if self.valor_presente is not None:
             print(f"Valor Presente do Portfólio: R$ {self.valor_presente:.2f}")
         else:
@@ -37,6 +39,9 @@ class Portfolio:
 
     @staticmethod
     def considerar_alternativa(compras_df, vendas_df, alternativas_df):
+        compras_df = copy.deepcopy(compras_df)
+        vendas_df = copy.deepcopy(vendas_df)
+        alternativas_df = copy.deepcopy(alternativas_df)
         if alternativas_df is not None:
             for index, row in alternativas_df.iterrows():
                 if row['ponta'] == 'C':

@@ -5,6 +5,7 @@ from utils.leitor_infomacoes import load_portfolio_data, load_previsao_precos_da
 from objetos.portfolio import Portfolio
 from decision_models import xf_models
 import utils.plotter as plt
+import copy
 
 pd.options.display.float_format = '{:.2f}'.format
 
@@ -33,6 +34,7 @@ for cenario in previsao_precos:
     list_npv = []
     for nome, df_alt in dict_df_alternativas.items():
         p = Portfolio(previsao_precos[cenario], compras_df, vendas_df, df_alt)
+        p = copy.deepcopy(p)
         list_portfolios.append(p)
         list_npv.append(p.valor_presente)
     payoff_objetos.append(list_portfolios)
