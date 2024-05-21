@@ -42,3 +42,13 @@ def plotar_volume_financeiro(portfolio):
                       xaxis_title='Data',
                       yaxis_title='Valor')
     fig.show()
+
+
+def plotar_volume_alternativas(list_objetos_alternativas):
+    fig = go.Figure()
+    for alt in list_objetos_alternativas:
+        fig.add_trace(go.Bar(x=alt.informacoes.index, y=alt.informacoes['volume'], name=alt.nome))
+    fig.update_layout(title='Volume das alternativas',
+                      xaxis_title='Data',
+                      yaxis_title='Valor')
+    fig.show()
